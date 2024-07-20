@@ -1,7 +1,9 @@
 <script lang="ts">
+  import { modalManager } from "$lib/common/modals";
   import { Button } from "$ui/button";
   import * as Dialog from "$ui/dialog";
   import { ControlContainer, Form, Input, maxLength, minLength, Select, Switch, Textarea } from "@svelte.codes/forms";
+  import { toast } from "svelte-sonner";
 
   const form = new Form({
     controls: [
@@ -61,7 +63,13 @@
       <div class="flex flex-1 items-center">
         <Switch control={form.getControl("publish")} />
       </div>
-      <Button variant="outline" disabled={!valid}>Create</Button>
+      <Button
+        variant="outline"
+        disabled={!valid}
+        on:click={() => {
+          toast.success("Your topic has been created!");
+          modalManager.close("create-topic");
+        }}>Create</Button>
     </Dialog.Footer>
   </Dialog.Content>
 </Dialog.Root>

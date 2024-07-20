@@ -4,6 +4,7 @@
   import Icon from "@iconify/svelte";
   import LifeBuoy from "lucide-svelte/icons/life-buoy";
   import SquareUser from "lucide-svelte/icons/square-user";
+  import { link } from "svelte-spa-router";
   import type { VerticalNavItem } from "./vertical-nav-item";
 
   const items: VerticalNavItem[] = [
@@ -24,9 +25,11 @@
   {#each items as item}
     <Tooltip.Root>
       <Tooltip.Trigger asChild let:builder>
-        <Button variant="ghost" size="icon" class="rounded-lg" aria-label={item.label} builders={[builder]}>
-          <Icon icon={item.icon} class="size-7" />
-        </Button>
+        <a use:link={item.href}>
+          <Button variant="ghost" size="icon" class="rounded-lg" aria-label={item.label} builders={[builder]}>
+            <Icon icon={item.icon} class="size-7" />
+          </Button>
+        </a>
       </Tooltip.Trigger>
       <Tooltip.Content side="right" sideOffset={5}>{item.label}</Tooltip.Content>
     </Tooltip.Root>

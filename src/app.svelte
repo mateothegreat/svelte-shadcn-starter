@@ -4,11 +4,14 @@
 
   import Shell from "$lib/layout/shell.svelte";
   import { Button } from "$ui/button";
+  import { Toaster } from "svelte-sonner";
 </script>
 
 <div class="grid h-screen w-full pl-[53px]">
   <Shell />
 </div>
+
+<Toaster />
 
 <Button variant="outline">Click me</Button>
 <ModeWatcher />

@@ -4,18 +4,29 @@
   import File from "lucide-svelte/icons/file";
   import ListFilter from "lucide-svelte/icons/list-filter";
 
+  import Editor from "$lib/components/editor/editor.svelte";
   import { Badge } from "$ui/badge";
   import { Button } from "$ui/button";
   import * as Card from "$ui/card";
   import * as DropdownMenu from "$ui/dropdown-menu";
   import * as Table from "$ui/table";
   import * as Tabs from "$ui/tabs";
+  import { onMount } from "svelte";
   import { openTopicCreate } from "../create/create";
 
-  openTopicCreate();
+  // openTopicCreate();
+
+  onMount(() => {
+    // drawerManager.open({
+    //   id: "topic-create",
+    //   component: Drawer,
+    //   placement: "bottom"
+    // });
+  });
 </script>
 
-<main class="grid flex-1 items-start gap-4 p-2 sm:px-4 sm:py-0 md:gap-6">
+<Editor />
+<main class="grid hidden flex-1 items-start gap-4 p-2 sm:px-4 sm:py-0 md:gap-6">
   <Tabs.Root value="all" class="flex  flex-col gap-2">
     <div class="flex items-center">
       <Tabs.List>
