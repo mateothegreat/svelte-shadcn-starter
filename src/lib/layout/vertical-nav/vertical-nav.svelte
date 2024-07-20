@@ -25,7 +25,7 @@
   ];
 </script>
 
-<nav class="mt-16 grid gap-1 p-2">
+<nav class="grid gap-1 p-2">
   {#each items as item}
     <Tooltip.Root>
       <Tooltip.Trigger asChild let:builder>

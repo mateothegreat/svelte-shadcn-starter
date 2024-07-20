@@ -1,9 +1,17 @@
 <script lang="ts">
-  import { mode } from "mode-watcher";
+  import { writable } from "svelte/store";
+
+  export let theme: "light" | "dark" = "light";
+
+  const t = writable<"light" | "dark">(theme);
+
+  if (theme) {
+    t.set(theme);
+  }
 </script>
 
 <div class={$$props.class}>
-  {#if $mode === "light"}
+  {#if $t === "light"}
     <svg class="visible dark:hidden" viewBox="51.3226 120.0469 267.5666 142.5703" xmlns="http://www.w3.org/2000/svg">
       <defs>
         <clipPath id="15b8af598c">
@@ -430,7 +438,7 @@
       </g>
     </svg>
   {/if}
-  {#if $mode === "dark"}
+  {#if $t === "dark"}
     <svg class="!dark:hidden dark:visible" viewBox="1.9933 0 267.567 142.5703" xmlns="http://www.w3.org/2000/svg">
       <defs>
         <clipPath id="b451c83921">
