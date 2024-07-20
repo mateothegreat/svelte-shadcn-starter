@@ -14,7 +14,11 @@
 </script>
 
 <header class="sticky top-0 z-10 flex h-[57px] items-center gap-1 border-b bg-background px-4">
-  <h1 class="text-xl font-semibold">Playground</h1>
+  <h1 class="flex items-center gap-1 font-semibold">
+    <span class="text-slate-600">auto</span>
+    <span class="mt-0.5 h-6 border-l-2 border-indigo-600"></span>
+    <span class="ml-0.5 text-green-600">bots</span>
+  </h1>
   <Drawer.Root>
     <Drawer.Trigger asChild let:builder>
       <Button builders={[builder]} variant="ghost" size="icon" class="md:hidden">

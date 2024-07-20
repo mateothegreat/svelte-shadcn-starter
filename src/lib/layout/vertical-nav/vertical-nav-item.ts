@@ -4,4 +4,5 @@ export interface VerticalNavItem {
   href: string;
   icon: string;
   tooltip?: string;
+  classes?: string;
 }

@@ -1,9 +1,14 @@
-import { modalManager } from "$lib/common/modals"
-import Create from "./create.svelte"
+import { drawerManager } from "$lib/common/drawers";
+import Manage from "../manage/manage.svelte";
 
 export const openTopicCreate = () => {
-  modalManager.open({
-    id: "create-topic",
-    component: Create
-  })
+  drawerManager.open({
+    id: "topic-create",
+    component: Manage,
+    placement: "bottom",
+    data: {
+      title: "Create Topic",
+      description: "Manage the topic details and settings."
+    }
+  });
 }
