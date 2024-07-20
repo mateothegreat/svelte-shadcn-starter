@@ -5,6 +5,7 @@
   import Share from "lucide-svelte/icons/share";
   import Turtle from "lucide-svelte/icons/turtle";
 
+  import Logo from "$lib/common/logo.svelte";
   import { Button } from "$ui/button";
   import * as Drawer from "$ui/drawer";
   import { Input } from "$ui/input";
@@ -13,11 +14,12 @@
   import { Textarea } from "$ui/textarea";
 </script>
 
-<header class="sticky top-0 z-10 flex h-[57px] items-center gap-1 border-b bg-background px-4">
+<header class="left-0 top-0 flex h-[57px] items-center gap-1 border-b bg-background px-4">
   <h1 class="flex items-center gap-1 font-semibold">
-    <span class="text-slate-600">auto</span>
+    <!-- <span class="text-slate-600">auto</span>
     <span class="mt-0.5 h-6 border-l-2 border-indigo-600"></span>
-    <span class="ml-0.5 text-green-600">bots</span>
+    <span class="ml-0.5 text-green-600">bots</span> -->
+    <Logo class="w-[90px]" />
   </h1>
   <Drawer.Root>
     <Drawer.Trigger asChild let:builder>

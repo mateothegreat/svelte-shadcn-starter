@@ -3,7 +3,7 @@ import Manage from "../manage/manage.svelte";
 
 export const openTopicCreate = () => {
   drawerManager.open({
-    id: "topic-create",
+    id: "manage-topic",
     component: Manage,
     placement: "bottom",
     data: {

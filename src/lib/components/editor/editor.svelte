@@ -1,11 +1,8 @@
 <script lang="ts">
-  import { fullscreen } from "@milkdown-lab/plugin-fullscreen";
   import { splitEditing } from "@milkdown-lab/plugin-split-editing";
   import { commandsCtx, defaultValueCtx, Editor, rootCtx } from "@milkdown/core";
-  import { history } from "@milkdown/plugin-history";
   import { commonmark, splitListItemCommand, toggleEmphasisCommand, toggleStrongCommand, wrapInBlockquoteCommand } from "@milkdown/preset-commonmark";
-  import { nord } from "@milkdown/theme-nord";
-  import { onMount } from "svelte";
+  import { onDestroy, onMount } from "svelte";
   import Button from "./button.svelte";
 
   export let preview: boolean = false;
@@ -14,32 +11,38 @@
   let div: HTMLDivElement;
   let editor: Editor;
 
-  onMount(() => {
-    make(true);
+  onMount(() => {});
+
+  onDestroy(async () => {
+    // console.log("Destroy");
+    // editor.remove(splitEditing);
+    // await editor.destroy(true);
+    // editor = null;
+    div.parentNode.removeChild(div);
   });
 
   const make = async (split?: boolean) => {
-    editor = await Editor.make()
-      .config((ctx) => {
-        ctx.set(rootCtx, div);
-        ctx.set(defaultValueCtx, markdown);
-        // ctx.set(splitEditingOptionsCtx.key, {
-        //   lineNumber: false
-        // });
-      })
-      .config(nord)
-      .use(fullscreen)
-      .use(commonmark)
-      .use(history);
+    try {
+      editor = await Editor.make()
+        .config((ctx) => {
+          ctx.set(rootCtx, div);
+          ctx.set(defaultValueCtx, markdown);
+        })
+        // .use(fullscreen)
+        .use(commonmark)
+        .use(splitEditing);
 
-    if (split) {
-      editor.use(splitEditing);
+      // if (split) {
+      //   editor.use(splitEditing);
+      // }
+
+      await editor.create();
+    } catch (error) {
+      console.error("Error creating editor:", error);
     }
-
-    await editor.create();
-
     // editor.ctx.get(commandsCtx).call("ToggleFullscreen", { value: true });
   };
+  make(true);
 </script>
 
 <div class="">

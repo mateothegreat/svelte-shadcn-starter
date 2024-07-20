@@ -43,18 +43,30 @@
                 <span class="sr-only">Toggle menu</span>
               </Button>
             </DropdownMenu.Trigger>
-            <DropdownMenu.Content align="end">
-              <DropdownMenu.Label>Actions</DropdownMenu.Label>
+            <DropdownMenu.Content>
               <DropdownMenu.Item
+                class="text-xs"
                 on:click={() => {
                   drawerManager.open({
-                    id: "topic-create",
+                    id: "manage-topic",
                     component: Manage,
                     placement: "bottom",
                     data: topic
                   });
                 }}>Edit</DropdownMenu.Item>
               <DropdownMenu.Item
+                class="text-xs"
+                on:click={() => {
+                  drawerManager.open({
+                    id: "manage-topic",
+                    component: Manage,
+                    placement: "bottom",
+                    data: topic
+                  });
+                }}>Duplicate</DropdownMenu.Item>
+              <DropdownMenu.Separator />
+              <DropdownMenu.Item
+                class="text-xs text-pink-600"
                 on:click={() => {
                   confirmOpen("Delete Topic", "Are you sure you want to delete this topic?").subscribe((result) => {
                     if (result) {

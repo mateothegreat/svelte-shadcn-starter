@@ -5,6 +5,7 @@
   import Icon from "@iconify/svelte";
   import type { DrawerInstance } from "@svelte.codes/drawer";
   import { ControlContainer, Form, FormControl, Input, maxLength, minLength, Select } from "@svelte.codes/forms";
+  import { onMount } from "svelte";
   import type { Topic } from "./../topic.ts";
 
   export let instance: DrawerInstance<Topic>;
@@ -51,9 +52,17 @@
 
   const selected = (form.getControl("status") as FormControl<string> | undefined)?.data?.[0] ?? null;
   let date = new Date();
-
+  let titleControl: Input;
   let time;
   let value = "";
+
+  onMount(() => {
+    setTimeout(() => {
+      titleControl.element.focus();
+      const length = titleControl.element.value.length;
+      titleControl.element.setSelectionRange(length, length);
+    }, 100);
+  });
 
   const markdown = `
 # h1
@@ -89,7 +98,7 @@ const new = 1
 </script>
 
 <div class="px-1">
-  <div class="flex w-full flex-col gap-4 rounded-t-xl bg-black p-4 shadow-lg shadow-slate-600">
+  <div class="flex w-full flex-col gap-4 border-t-4 border-slate-800 bg-black p-4 shadow-lg shadow-slate-600">
     <div class="flex justify-between gap-2">
       <div class="flex items-start gap-2">
         <Icon icon="icon-park-outline:topic-discussion" class="size-12 text-slate-500" />
@@ -98,9 +107,14 @@ const new = 1
           <div class="-mt-1 text-sm text-slate-600">{description}</div>
         </div>
       </div>
-      <Icon icon="mdi:close" class="size-6 cursor-pointer text-slate-800 hover:text-slate-500" />
+      <div
+        class=""
+        on:click={() => {
+          instance.manager.close("manage-topic");
+        }}>
+        <Icon icon="mdi:close" class="size-6 cursor-pointer text-slate-800 hover:text-slate-500" />
+      </div>
     </div>
-
     <div class="flex flex-col gap-2">
       <!-- <div class="">
         <SveltyPicker bind:value={time} format="hh:ii" displayFormat="HH:ii P" />
@@ -108,7 +122,7 @@ const new = 1
       <div class="grid grid-cols-12 gap-4">
         <div class="col-span-10">
           <ControlContainer label="Title">
-            <Input control={form.getControl("title")} />
+            <Input bind:this={titleControl} control={form.getControl("title")} autofocus />
           </ControlContainer>
         </div>
         <div class="col-span-2">
@@ -123,7 +137,6 @@ const new = 1
         </div>
       </ControlContainer>
     </div>
-
     <div class="flex justify-end gap-2">
       <Button
         on:click={() => {
