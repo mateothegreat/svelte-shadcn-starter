@@ -18,7 +18,10 @@
     // editor.remove(splitEditing);
     // await editor.destroy(true);
     // editor = null;
+    console.log(div.parentNode);
     div.parentNode.removeChild(div);
+    await editor.destroy();
+    editor = null;
   });
 
   const make = async (split?: boolean) => {
@@ -43,13 +46,16 @@
     // editor.ctx.get(commandsCtx).call("ToggleFullscreen", { value: true });
   };
   make(true);
+  // setTimeout(() => {
+  //   editor.action((ctx) => ctx.get(commandsCtx).call(toggleSplitEditing.key));
+  // }, 1000);
 </script>
 
-<div class="">
+<div class="flex h-full min-h-96 flex-col">
   <div class="flex gap-1 bg-slate-100/75 p-1 dark:bg-zinc-900/25">
     <Button
       onClick={() => editor.action((ctx) => ctx.get(commandsCtx).call(toggleEmphasisCommand.key))}
-      svg={`<svg class="h-4 w-4" id="fi_3019775" enable-background="new 0 0 64 64" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg"><path d="m45.171 1.62h-17.342c-2.761 0-5 2.239-5 5s2.239 5 5 5h3.217l-8.451 40.675c-.006.029-.003.056-.008.085h-3.758c-2.761 0-5 2.238-5 5s2.239 5 5 5h17.342c2.762 0 5-2.238 5-5s-2.238-5-5-5h-3.399l8.467-40.76h3.932c2.762 0 5-2.239 5-5s-2.238-5-5-5z"></path></svg>`} />
+      svg={`<svg id="fi_3019775" enable-background="new 0 0 64 64" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg"><path d="m45.171 1.62h-17.342c-2.761 0-5 2.239-5 5s2.239 5 5 5h3.217l-8.451 40.675c-.006.029-.003.056-.008.085h-3.758c-2.761 0-5 2.238-5 5s2.239 5 5 5h17.342c2.762 0 5-2.238 5-5s-2.238-5-5-5h-3.399l8.467-40.76h3.932c2.762 0 5-2.239 5-5s-2.238-5-5-5z"></path></svg>`} />
     <Button
       onClick={() => editor.action((ctx) => ctx.get(commandsCtx).call(toggleStrongCommand.key))}
       svg={`<svg id="fi_3019759" enable-background="new 0 0 64 64" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg"><path d="m45.108 28.993c2.142-3.175 3.307-7.061 3.055-11.224-.583-9.63-8.873-16.993-18.521-16.993h-12.174c-4.677 0-8.468 3.791-8.468 8.468v17.756 10 17.755c0 4.677 3.792 8.469 8.469 8.469h18.972c9.528 0 17.766-7.177 18.503-16.676.592-7.626-3.578-14.35-9.836-17.555zm-26.108-1.993v-16.224h10.798c4.316 0 8.091 3.249 8.38 7.556.316 4.723-3.437 8.668-8.094 8.668zm17.888 26.224h-17.888v-16.224h11.084.01 6.507c4.316 0 8.091 3.249 8.38 7.556.317 4.722-3.435 8.668-8.093 8.668z"></path></svg>`} />
@@ -63,7 +69,7 @@
       onClick={() => (preview = !preview)}
       svg={`<svg id="fi_8682865" enable-background="new 0 0 512 512" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg"><g id="Developer"><g><path d="m256 436c-39.265 0-76.581-12.422-107.914-35.923-.082-.061-124.205-96.163-124.205-96.163-14.956-11.288-23.881-29.187-23.881-47.914s8.925-36.626 23.882-47.914c0 0 124.123-96.101 124.205-96.163 31.332-23.501 68.648-35.923 107.913-35.923s76.581 12.422 107.914 35.923c.082.061 124.205 96.163 124.205 96.163 14.956 11.288 23.881 29.187 23.881 47.914s-8.925 36.626-23.882 47.914c0 0-124.123 96.101-124.205 96.163-31.332 23.501-68.648 35.923-107.913 35.923zm-83.792-67.832c24.329 18.208 53.301 27.832 83.792 27.832s59.463-9.624 83.792-27.832c0 0 124.104-96.087 124.186-96.148 5.098-3.824 8.022-9.663 8.022-16.02s-2.924-12.196-8.022-16.02c-.082-.061-124.186-96.148-124.186-96.148-24.329-18.208-53.301-27.832-83.792-27.832-30.494 0-59.465 9.624-83.795 27.835 0 0-124.101 96.084-124.182 96.145-5.099 3.824-8.023 9.664-8.023 16.02s2.924 12.196 8.022 16.02c.082.061 124.186 96.148 124.186 96.148z"></path></g><g><path d="m231.149 355.403c-10.716-2.679-17.231-13.538-14.552-24.254l40-160c2.679-10.716 13.539-17.231 24.253-14.552 10.716 2.679 17.231 13.538 14.552 24.254l-40 160c-2.678 10.714-13.538 17.231-24.253 14.552z"></path></g><g><path d="m164 312-31.988-23.99c-10.026-7.518-16.012-19.485-16.012-32.01s5.986-24.492 16.013-32.011l31.987-23.989c8.834-6.627 21.372-4.837 28 4.001 6.627 8.837 4.836 21.373-4.001 28l-31.988 23.99 31.989 24.009c8.837 6.627 10.628 19.163 4.001 28-6.629 8.837-19.163 10.628-28.001 4z"></path></g><g><path d="m320 308c-6.627-8.837-4.836-21.373 4.001-28l31.988-23.99-31.989-24.01c-8.837-6.627-10.628-19.163-4.001-28 6.629-8.837 19.164-10.628 28-4.001l31.988 23.99c10.027 7.519 16.013 19.486 16.013 32.011s-5.986 24.492-16.013 32.011l-31.987 23.989c-8.836 6.627-21.374 4.836-28-4z"></path></g><g><path d="m20 156c-11.046 0-20-8.954-20-20v-40c0-33.084 26.916-60 60-60h40c11.046 0 20 8.954 20 20s-8.954 20-20 20h-40c-11.028 0-20 8.972-20 20v40c0 11.046-8.954 20-20 20z"></path></g><g><path d="m492 156c-11.046 0-20-8.954-20-20v-40c0-11.028-8.972-20-20-20h-40c-11.046 0-20-8.954-20-20s8.954-20 20-20h40c33.084 0 60 26.916 60 60v40c0 11.046-8.954 20-20 20z"></path></g><g><path d="m452 476h-40c-11.046 0-20-8.954-20-20s8.954-20 20-20h40c11.028 0 20-8.972 20-20v-40c0-11.046 8.954-20 20-20s20 8.954 20 20v40c0 33.084-26.916 60-60 60z"></path></g><g><path d="m100 476h-40c-33.084 0-60-26.916-60-60v-40c0-11.046 8.954-20 20-20s20 8.954 20 20v40c0 11.028 8.972 20 20 20h40c11.046 0 20 8.954 20 20s-8.954 20-20 20z"></path></g></g></svg>`} />
   </div>
-  <div class="wrapper h-96 w-full overflow-auto" class:show={preview} class:hide={!preview} bind:this={div} />
+  <div class="wrapper w-full flex-1" class:show={preview} class:hide={!preview} bind:this={div} />
 </div>
 
 <style>
@@ -103,20 +109,32 @@
     @apply my-2 border-l-4 border-gray-300 pl-2 dark:border-gray-600;
   }
 
+  :global(.milkdown) {
+    @apply h-full;
+  }
+
   :global(.split-editor) {
-    @apply flex;
+    @apply flex h-full;
   }
 
   :global(.split-editor .prose) {
     @apply w-1/2 border-r-2 border-slate-200 dark:border-slate-800;
   }
 
-  .hide :global(.split-editor .prose) {
-    @apply w-full;
+  .hide :global(.split-editor .editor) {
+    @apply w-full caret-green-500 outline-none;
+  }
+
+  .show :global(.milkdown .ProseMirror) {
+    @apply h-full;
+  }
+
+  .show :global(.split-editor .editor) {
+    @apply h-full w-1/2 caret-green-500 outline-none;
   }
 
   .show :global(.split-editor .milkdown-split-editor) {
-    @apply visible;
+    @apply visible w-1/2;
   }
 
   .hide :global(.split-editor .milkdown-split-editor) {
@@ -124,7 +142,7 @@
   }
 
   :global(.cm-gutters) {
-    @apply !bg-zinc-100 dark:!bg-slate-800/25;
+    @apply !border-r-0 !bg-zinc-100 dark:!bg-slate-800/25;
   }
   :global(.cm-activeLineGutter) {
     @apply !bg-zinc-200 dark:!bg-slate-600/50;

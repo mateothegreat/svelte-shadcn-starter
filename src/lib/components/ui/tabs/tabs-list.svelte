@@ -8,6 +8,8 @@
   export { className as class };
 </script>
 
-<TabsPrimitive.List class={cn("inline-flex h-9 items-center justify-center rounded-lg bg-zinc-800/50 p-1 text-slate-500", className)} {...$$restProps}>
+<TabsPrimitive.List
+  class={cn("inline-flex h-9 items-center justify-center gap-1 rounded-lg border border-zinc-200 bg-slate-100 p-1 text-slate-500 dark:border-slate-800 dark:bg-zinc-900/70", className)}
+  {...$$restProps}>
   <slot />
 </TabsPrimitive.List>

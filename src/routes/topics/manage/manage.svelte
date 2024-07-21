@@ -6,6 +6,7 @@
   import type { DrawerInstance } from "@svelte.codes/drawer";
   import { ControlContainer, Form, FormControl, Input, maxLength, minLength, Select } from "@svelte.codes/forms";
   import { onMount } from "svelte";
+  import { toast } from "svelte-sonner";
   import type { Topic } from "./../topic.ts";
 
   export let instance: DrawerInstance<Topic>;
@@ -97,8 +98,8 @@ const new = 1
 `;
 </script>
 
-<div class="px-1">
-  <div class="flex w-full flex-col gap-4 border-t-4 border-slate-800 bg-black p-4 shadow-lg shadow-slate-600">
+<div class="px-1.5">
+  <div class="flex w-full flex-col gap-4 rounded-t-2xl border-t-2 border-zinc-900/75 bg-black p-4 shadow-lg shadow-slate-600">
     <div class="flex justify-between gap-2">
       <div class="flex items-start gap-2">
         <Icon icon="icon-park-outline:topic-discussion" class="size-12 text-slate-500" />
@@ -143,11 +144,18 @@ const new = 1
           confirmOpen("Delete Topic", "Are you sure you want to delete this topic?").subscribe((result) => {
             if (result) {
               console.log("Deleted");
+              instance.manager.close("manage-topic");
             }
           });
         }}
         variant="outline">Delete</Button>
-      <Button variant="default">Save</Button>
+      <Button
+        variant="default"
+        on:click={() => {
+          console.log(form.getControl("title")?.value);
+          instance.manager.close("manage-topic");
+          toast.success("Your changes have been saved!");
+        }}>Save</Button>
     </div>
   </div>
 </div>
